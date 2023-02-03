@@ -1,0 +1,56 @@
+html, body {
+    height: 100%;
+    width: 100%;
+    background-color: #ededee;
+}
+
+.wrapper {
+    padding-top: 2%;
+    padding-bottom: 2%;
+    margin-top: 8%;
+}
+.title{
+    padding-top: 15px;
+    /* padding-bottom: 10px; */
+}
+.card{
+    margin-top: 15px;
+}
+.class-title {
+    border: none;
+}
+.add-a-class{
+    background-color: #f5f5f5;
+    border-style: dotted;
+}
+.video {
+    background-color: #e4eaf2;
+}
+.btn-train {
+    margin-top: 20px;
+    /* margin-bottom: 10px; */
+}
+.individual-class-output {
+    margin-top: 25px;
+}
+
+h1, h2 {
+    text-align: center;
+}
+
+h1 {
+    margin-top: 2%;
+}
+
+.container-fluid
+{
+    margin-left: 3.5%;
+}
+
+#prev {
+    margin-left: 7%;
+}
+
+#close {
+    margin-left: 5%;
+}
