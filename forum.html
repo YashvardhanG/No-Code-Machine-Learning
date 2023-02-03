@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forum</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+</head>
+<body>
+<!-- Navigation Bar -->
+	<header id="header">
+		<nav>
+			<div class="logo"><a href="index.html"><img src="assets/images/1.png" alt="Logo"></a></div>
+			<ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#about_section">About</a></li>
+                <li><a href="forum.html">FAQ</a></li>
+                <li><a class="active" href="app.html">Get Started</a></li>
+            </ul>
+		</nav>
+	</header>
+
+	<div class="flex">
+		<div class="flex_row">
+			<div class="flex_column_left">
+				<p>FAQ</p>
+				<h5>Frequently Asked Questions</h5>
+				<a href="#course_section"><button class = "flex_btn">Check FAQ's</button></a>
+			</div>
+			<div class="flex_column_right">
+				<img src="assets/images/forum-flex.png" alt="svg">
+			</div>
+		</div>
+	</div>
+	
+<!-- ANSWERED -->
+	<br><br>
+	<div class="course" id="course_section">
+        <center><p style="font-size: 50px; padding-bottom: 50px; margin-top: 100px;">General Questions</p></center>
+	</div>
+
+	<div class="accordion">
+		<div class="accordion-item">
+		  <a>What is NOML?</a>
+		  <div class="content">
+			<p>NOML - No Code Machine Learning is a web-based tool that makes creating machine learning models fast, easy, and accessible to everyone.</p>
+		  </div>
+		</div>
+		<div class="accordion-item">
+		  <a>Who can use it?</a>
+		  <div class="content">
+			<p>Educators, artists, students, innovators, makers of all kinds – really, anyone who has an idea they want to explore. No prerequisite machine learning knowledge required.</p>
+		  </div>
+		</div>
+		<div class="accordion-item">
+		  <a>How Does it work?</a>
+		  <div class="content">
+			<p>You train a computer to recognize your images without writing any machine learning code. Then, use your model in your own projects, sites, apps, and more.</p>
+		  </div>
+		</div>
+		<div class="accordion-item">
+		  <a>Can I use my ML model outside the interface?</a>
+		  <div class="content">
+			<p>Yes. You can export your model as a TensorFlow.js model and host it, so you can call it into any website or app. You can also convert it to TensorFlow and TensorFlow Lite and download it for local use.</p>
+		  </div>
+		</div>
+		<div class="accordion-item">
+		  <a>What do I do after training a model?</a>
+		  <div class="content">
+			<p>You can export your model to use it in projects!</p>
+		  </div>
+		</div>
+	</div>
+	<br><center><div><p id = "doubt"></p></div></center>
+    <br><br><br>
+
+<!-- FOOTER -->
+	<footer>
+		<div class="footer-container">
+			<div class="left-col">
+				<img src="assets/images/1.png" style="width: 100px;">
+				<p class="rights-text"><b>Created By</b> Yashvardhan Gupta</p>
+                <p>Vellore Institute of Technology, Chennai.</p>
+			</div>
+			<div class="right-col">
+				<h1 style="color: #fff">End of Page</h1>
+				<div class="border"></div>
+			</div>
+		</div>
+	</footer>
+
+	<script  src="doubt.js"></script>
+</body>
+</html>

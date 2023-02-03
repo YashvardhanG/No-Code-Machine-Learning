@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Load the latest version of TensorFlow.js -->
+    <script src="https://unpkg.com/@tensorflow/tfjs"></script>
+    <script src="https://unpkg.com/@tensorflow-models/mobilenet"></script>
+    <script src="https://unpkg.com/@tensorflow-models/knn-classifier"></script>
+
+    <title>Image Classifier</title>
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <header id="header">
+        <nav style="background-color: #000;">
+            <div class="logo"><a href="index.html"><img src="assets/images/1.png" alt="Logo"></a></div>
+            <ul>
+                <li><a href="index.html" style="color: white;">Home</a></li>
+                <li><a href="#about_section" style="color: white;">About</a></li>
+                <li><a href="forum.html" style="color: white;">FAQ</a></li>
+                <li><a class="active" href="#" id="prog">Download Model</a></li>
+            </ul>
+        </nav>  
+    </header>
+
+    <div class="wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-3">
+                    <h3 class="text-center text-primary">1. Input</h3>
+                    <div class="class-camera-section">
+                        <div class="card input-card">
+                            <div class="card-body input-body container-fluid">
+                                <!-- Webcam instance -->
+                                <video id="webcam-input" class="text-center align-middle" autoplay="" playsinline="" muted="true" width="260px" height="260px" style="-webkit-transform: scaleX(-1); transform: scaleX(-1); margin: auto"></video>                                
+                            </div>
+                        </div>
+                    </div>
+                    <br><button id="toggle" class="btn btn-primary w-100">Toggle Webcam</button>
+                    <br><small>The camera is <span class="togtext font-weight-bold" id="togtext">ON</span></small>
+                </div>
+                <div class="col-lg-3 offset-lg-1 class-train-section">
+                    <h3 class="text-center text-primary">2. Training</h3>
+                    <div class="card class-1">
+                        <div class="card-body">                            
+                            <input type="text" class="class-title" value="Class 1" data-output-id="output-class-1" />
+                            <button id="btn-class-1" class="btn btn-primary btn-train w-100" data-class="1">Train </button>
+                            <br>
+                            <small><span class="samples font-weight-bold" id="s1">0</span> samples</small>
+                        </div>
+                    </div>
+                    <div class="card class-2">
+                        <div class="card-body">                            
+                            <input type="text" class="class-title" value="Class 2" data-output-id="output-class-2"/>
+                            <button id="btn-class-2"  class="btn btn-primary btn-train w-100" data-class="2">Train </button>
+                            <br>
+                            <small><span class="samples font-weight-bold" id="s2">0</span> samples</small>
+                        </div>
+                    </div>
+                    <div class="card class-3 d-none" id="card-3">
+                        <div class="card-body">                            
+                            <input type="text" class="class-title" value="Class 3" data-output-id="output-class-3"/><span class="text-primary class_cross" style="font-size: xx-small" id="cross-3">Remove Class</span>
+                            <button id="btn-class-3"  class="btn btn-primary btn-train w-100" data-class="3">Train </button>
+                            <br>
+                            <small><span class="samples font-weight-bold" id="s3">0</span> samples</small>
+                        </div>
+                    </div>
+                    <div class="card class-4 d-none" id="card-4">
+                        <div class="card-body">                            
+                            <input type="text" class="class-title" value="Class 4" data-output-id="output-class-4"/><span class="text-primary class_cross" style="font-size: xx-small" id="cross-4">Remove Class</span>
+                            <button id="btn-class-4"  class="btn btn-primary btn-train w-100" data-class="4">Train </button>
+                            <br>
+                            <small><span class="samples font-weight-bold" id="s4">0</span> samples</small>
+                        </div>
+                    </div>
+                    <div class="card class-5 d-none" id="card-5">
+                        <div class="card-body">                            
+                            <input type="text" class="class-title" value="Class 5" data-output-id="output-class-5"/><span class="text-primary class_cross" style="font-size: xx-small" id="cross-5">Remove Class</span>
+                            <button id="btn-class-5"  class="btn btn-primary btn-train w-100" data-class="5">Train </button>
+                            <br>
+                            <small><span class="samples font-weight-bold" id="s5">0</span> samples</small>
+                        </div>
+                    </div>
+                    <div class="add-a-class card">
+                        <div class="card-body text-center">
+                            <a href="#" class="btn btn-outline-primary btn-add-class">+ Add a class</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 output-section" id="prev">
+                    <h3 class="text-center text-primary">3. Preview</h3>
+                    <div class="card">
+                        <div class="card-body output-body">                            
+                            <div class="individual-class-output">
+                                <h6 id="output-class-1" class="output-title">Class 1</h6> <div class="progress"><div id="progress-bar-class-1" class="progress-bar progress-bar-striped" role="progressbar" style="width: 0%"  aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div></div>
+                            </div>
+                            <div class="individual-class-output">
+                                <h6 id="output-class-2" class="output-title">Class 2</h6> <div class="progress"><div id="progress-bar-class-2" class="progress-bar progress-bar-striped" role="progressbar" style="width: 0%"  aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div></div>
+                            </div>
+                            <div class="individual-class-output d-none">
+                                <h6 id="output-class-3" class="output-title">Class 3</h6> <div class="progress"><div id="progress-bar-class-3" class="progress-bar progress-bar-striped" role="progressbar" style="width: 0%"  aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div></div>
+                            </div>
+                            <div class="individual-class-output d-none">
+                                <h6 id="output-class-4" class="output-title">Class 4</h6> <div class="progress"><div id="progress-bar-class-4" class="progress-bar progress-bar-striped" role="progressbar" style="width: 0%"  aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div></div>
+                            </div>
+                            <div class="individual-class-output d-none">
+                                <h6 id="output-class-5" class="output-title">Class 5</h6> <div class="progress"><div id="progress-bar-class-5" class="progress-bar progress-bar-striped" role="progressbar" style="width: 0%"  aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div></div>
+                            </div>
+                        </div>
+                    </div>
+                    <br><button id="download" class="btn btn-primary w-100">Download Model</button>
+                    <br><br><button id="reset" class="btn btn-primary w-100">Reset Application</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Window  -->
+    <div class="modal fade" id="wait" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
+    data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Initializing App</h5>
+            </div>
+            <div class="modal-body">
+                Hey there! Please wait, while the application loads your model.
+                <br><br><b>Note:</b> If you see this message for long, please check your internet connection.
+            </div>
+        </div>
+    </div>
+    </div>
+    
+    <div class="modal fade" id="success" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
+    data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Model Downloaded!</h5>
+            </div>
+            <div class="modal-body">
+                Congratulations, You have successfully downloaded your model!
+                <br><br><button id="cont" class="btn btn-primary w-40">Continue Application</button>
+                <button id="close" class="btn btn-primary w-40">Reset Application</button>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"> </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"> </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"  integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">  </script>
+    <script src="assets/js/main.js"> </script>
+</body>
+
+</html>
